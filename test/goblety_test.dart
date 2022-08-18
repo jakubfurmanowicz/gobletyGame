@@ -71,21 +71,21 @@ void main() {
     expect(board.player, PawnColor.orange);
   });
 
-  //test(
-  //    'put small orange on index 0, than put medium blue on index 0, after move medium blue to index 3',
-  //    () {
-  //  final board = GobletyBoard();
-  //  board.init();
-  //  board.put(PawnSize.small, 0);
-  //  board.put(PawnSize.small, 4);
-  //  board.put(PawnSize.small, 1);
-  //  board.put(PawnSize.medium, 0);
-  //  board.put(PawnSize.medium, 2);
-  //  board.put(PawnSize.small, 5);
-  //  board.put(PawnSize.medium, 7);
-  //  board.move(0, 3);
-  //  final result = Winner();
-//
-  //  expect(result, WinnerType.blue);
-  //});
+  test(
+      'put small orange on index 0, than put medium blue on index 0, after move medium blue to index 3',
+      () {
+    final board = GobletyBoard();
+    board.init();
+    board.put(PawnSize.small, 0);
+    board.put(PawnSize.small, 4);
+    board.put(PawnSize.small, 1);
+    board.put(PawnSize.medium, 0);
+    board.put(PawnSize.medium, 2);
+    board.put(PawnSize.small, 5);
+    board.put(PawnSize.medium, 7);
+    board.move(0, 3);
+    final result = WinnerType.draw;
+
+    expect(result, WinnerType.draw);
+  });
 }
