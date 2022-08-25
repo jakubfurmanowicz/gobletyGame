@@ -3,6 +3,22 @@ import 'goblety_pawn.dart';
 
 class Winner {
   WinnerType winnerType(List<GobletyField> map) {
+    final isBlueWinner = winnerTypeForColor(map, PawnColor.blue) == WinnerType.blue;
+    final isOrangeWinner = winnerTypeForColor(map, PawnColor.orange) == WinnerType.orange;
+
+    if (isBlueWinner && isOrangeWinner) {
+
+      return WinnerType.draw;
+    } else if (isBlueWinner) {
+      return WinnerType.blue;
+    } else if (isOrangeWinner) {
+      return WinnerType.orange;
+    } else {
+      return WinnerType.playing;
+    }
+  }
+
+  WinnerType winnerTypeForColor(List<GobletyField> map, PawnColor pawnColor) {
     String whoIsTheWinner = '';
     final data = [
       [0, 1, 2],
@@ -19,23 +35,22 @@ class Winner {
           element.map((e) => map[e]).every((element) => element is PawnField);
       if (allPawnFields) {
         final pawnFields = element.map((e) => map[e] as PawnField).toList();
-        final colorFirst = pawnFields.first.pawn.color;
-        final allSameColor =
-            pawnFields.every((element) => element.pawn.color == colorFirst);
-        if (allSameColor) {
-          switch (colorFirst) {
+
+        final isWinner =
+            pawnFields.every((element) => element.pawn.color == pawnColor);
+
+        if (isWinner) {
+          switch (pawnColor) {
             case PawnColor.blue:
-              print(whoIsTheWinner = 'Blue is the winner');
               return WinnerType.blue;
             case PawnColor.orange:
-              print(whoIsTheWinner = 'Orange is the winner');
               return WinnerType.orange;
           }
         }
       }
     }
-    return WinnerType.draw;
+    return WinnerType.playing;
   }
 }
 
-enum WinnerType { orange, blue, draw }
+enum WinnerType { orange, blue, draw, playing }

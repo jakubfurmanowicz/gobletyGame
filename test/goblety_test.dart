@@ -72,9 +72,10 @@ void main() {
   });
 
   test(
-      'put small orange on index 0, than put medium blue on index 0, after move medium blue to index 3',
+      'check winner after move goblet to new line if first line is full of blue and second is full of orange',
       () {
     final board = GobletyBoard();
+    final winner = Winner();
     board.init();
     board.put(PawnSize.small, 0);
     board.put(PawnSize.small, 4);
@@ -84,8 +85,65 @@ void main() {
     board.put(PawnSize.small, 5);
     board.put(PawnSize.medium, 7);
     board.move(0, 3);
-    final result = WinnerType.draw;
+    final result = winner.winnerType(board.flatMap());
 
     expect(result, WinnerType.draw);
+  });
+
+  test('check winner if blue are on index 0, 1, 2', () {
+    final board = GobletyBoard();
+    final winner = Winner();
+    board.init();
+    board.put(PawnSize.large, 0);
+    board.put(PawnSize.large, 3);
+    board.put(PawnSize.large, 1);
+    board.put(PawnSize.large, 4);
+    board.put(PawnSize.medium, 2);
+    final result = winner.winnerType(board.flatMap());
+
+    expect(result, WinnerType.blue);
+  });
+
+  test('check winner if blue is on index 3, 4, 5', () {
+    final board = GobletyBoard();
+    final winner = Winner();
+    board.init();
+    board.put(PawnSize.large, 3);
+    board.put(PawnSize.large, 6);
+    board.put(PawnSize.large, 4);
+    board.put(PawnSize.large, 7);
+    board.put(PawnSize.medium, 5);
+    final result = winner.winnerType(board.flatMap());
+
+    expect(result, WinnerType.blue);
+  });
+
+  test('check winner if blue is on index 6, 7, 8', (){
+    final board = GobletyBoard();
+    final winner = Winner();
+    board.init();
+    board.put(PawnSize.large, 6);
+    board.put(PawnSize.large, 0);
+    board.put(PawnSize.large, 7);
+    board.put(PawnSize.large, 3);
+    board.put(PawnSize.medium, 8);
+    final result = winner.winnerType(board.flatMap());
+
+    expect(result, WinnerType.blue);
+  });
+
+    test('check winner if orange is on index 0, 1, 2', () {
+    final board = GobletyBoard();
+    final winner = Winner();
+    board.init();
+    board.put(PawnSize.large, 3);
+    board.put(PawnSize.large, 0);
+    board.put(PawnSize.large, 8);
+    board.put(PawnSize.large, 1);
+    board.put(PawnSize.small, 2);
+    board.put(PawnSize.medium, 2);
+    final result = winner.winnerType(board.flatMap());
+
+    expect(result, WinnerType.orange);
   });
 }
