@@ -3,11 +3,12 @@ import 'goblety_pawn.dart';
 
 class Winner {
   WinnerType winnerType(List<GobletyField> map) {
-    final isBlueWinner = winnerTypeForColor(map, PawnColor.blue) == WinnerType.blue;
-    final isOrangeWinner = winnerTypeForColor(map, PawnColor.orange) == WinnerType.orange;
+    final isBlueWinner =
+        winnerTypeForColor(map, PawnColor.blue) == WinnerType.blue;
+    final isOrangeWinner =
+        winnerTypeForColor(map, PawnColor.orange) == WinnerType.orange;
 
     if (isBlueWinner && isOrangeWinner) {
-
       return WinnerType.draw;
     } else if (isBlueWinner) {
       print('Blue is the winner');
@@ -43,10 +44,8 @@ class Winner {
         if (isWinner) {
           switch (pawnColor) {
             case PawnColor.blue:
-              print('Blue is the winner');
               return WinnerType.blue;
             case PawnColor.orange:
-              print('Orange is the winner');
               return WinnerType.orange;
           }
         }

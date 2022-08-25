@@ -22,7 +22,7 @@ void main(List<String> arguments) {
       print(
           "From which field do you want to move the pawn(you can only move the biggest pawn)?");
       final moveFrom = int.tryParse(stdin.readLineSync()?.toLowerCase() ?? "0");
-      print("On which field do you want to put the pawn");
+      print("On which field do you want to put the pawn?");
       final moveTo = int.tryParse(stdin.readLineSync()?.toLowerCase() ?? "0");
       try {
         board.move(moveFrom!, moveTo!);
