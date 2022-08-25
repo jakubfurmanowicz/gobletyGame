@@ -13,26 +13,34 @@ void main(List<String> arguments) {
   drawBoard.draw(board.flatMap());
 
   while (winner.winnerType(board.flatMap()) == WinnerType.playing) {
-    print("Gracz: ${board.player}");
+    print("Player: ${board.player}");
     drawBoard.drawPawns(board.currentPlayer().pawns);
-    print('Czy chcesz przecunąć swój pionek? (y/n)');
+    print('Do you want to move your pawn? (y/n)');
     final moveOrNot = stdin.readLineSync()?.toLowerCase();
 
     if (moveOrNot == 'y') {
       print(
-          "Wybierz pole z którego chcesz przesunąć pionek(możesz przesunąć największego gobleta)");
+          "From which field do you want to move the pawn(you can only move the biggest pawn)?");
       final moveFrom = int.tryParse(stdin.readLineSync()?.toLowerCase() ?? "0");
-      print("Na które pole chcesz przesunąć pionek");
+      print("On which field do you want to put the pawn");
       final moveTo = int.tryParse(stdin.readLineSync()?.toLowerCase() ?? "0");
-      board.move(moveFrom!, moveTo!);
+      try {
+        board.move(moveFrom!, moveTo!);
+      } catch (e) {
+        print('Wrong values');
+      }
       drawBoard.draw(board.flatMap());
     } else {
-      print("Na którym polu chcesz postawić pionek");
+      print("Where do you want to put the pawn");
       final choose = int.tryParse(stdin.readLineSync()?.toLowerCase() ?? "0");
-      print("Wybierz wielkość gobleta(0 = small, 1 = medium, 2 = large)");
+      print("Choose size of the pawn(0 = small, 1 = medium, 2 = large)");
       final chooseSizeOf =
           int.tryParse(stdin.readLineSync()?.toLowerCase() ?? "0");
-      board.put(PawnSize.values[chooseSizeOf!], choose!);
+      try {
+        board.put(PawnSize.values[chooseSizeOf!], choose!);
+      } catch (e) {
+        print('Wrong values');
+      }
       drawBoard.draw(board.flatMap());
     }
   }

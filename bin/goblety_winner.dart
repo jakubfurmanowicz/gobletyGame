@@ -10,8 +10,10 @@ class Winner {
 
       return WinnerType.draw;
     } else if (isBlueWinner) {
+      print('Blue is the winner');
       return WinnerType.blue;
     } else if (isOrangeWinner) {
+      print('Orange is the winner');
       return WinnerType.orange;
     } else {
       return WinnerType.playing;
@@ -19,7 +21,6 @@ class Winner {
   }
 
   WinnerType winnerTypeForColor(List<GobletyField> map, PawnColor pawnColor) {
-    String whoIsTheWinner = '';
     final data = [
       [0, 1, 2],
       [3, 4, 5],
@@ -42,8 +43,10 @@ class Winner {
         if (isWinner) {
           switch (pawnColor) {
             case PawnColor.blue:
+              print('Blue is the winner');
               return WinnerType.blue;
             case PawnColor.orange:
+              print('Orange is the winner');
               return WinnerType.orange;
           }
         }
