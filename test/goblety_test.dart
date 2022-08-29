@@ -335,4 +335,24 @@ void main() {
 
     expect(result, WinnerType.orange);
   });
+
+  test('check if none are winner', (){
+    final board = GobletyBoard();
+    final winner = Winner();
+    board.init();
+    board.put(PawnSize.small, 0);
+    board.put(PawnSize.large, 0);
+    board.put(PawnSize.medium, 4);
+    board.put(PawnSize.large, 1);
+    board.put(PawnSize.large, 2);
+    board.put(PawnSize.large, 2);
+    board.put(PawnSize.medium, 6);
+    board.put(PawnSize.large, 3);
+    board.put(PawnSize.medium, 5);
+    board.put(PawnSize.medium, 7);
+    board.put(PawnSize.small, 8);
+    final result = winner.winnerType(board.flatMap());
+
+    expect(result, WinnerType.playing);
+  });
 }
