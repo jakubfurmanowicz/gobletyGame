@@ -66,7 +66,7 @@ void main() {
     board.init();
     expect(board.player, PawnColor.blue);
 
-    final result = board.put(PawnSize.small, 0);
+    board.put(PawnSize.small, 0);
     expect(board.player, PawnColor.orange);
   });
 
